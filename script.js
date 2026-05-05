@@ -1,33 +1,32 @@
 
 const tabs = document.querySelectorAll('.tab');
-const panels = document.querySelectorAll('.tab-panel');
+const panels = document.querySelectorAll('.panel');
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
-    const target = tab.dataset.tab;
 
     tabs.forEach(t => t.classList.remove('active'));
     panels.forEach(p => p.classList.remove('active'));
 
     tab.classList.add('active');
+
+    const target = tab.dataset.tab;
     document.getElementById(target).classList.add('active');
   });
 });
 
-const departureChecks = document.querySelectorAll('#departure input[type="checkbox"]');
-const doneCount = document.getElementById('doneCount');
-const totalCount = document.getElementById('totalCount');
-const percentText = document.getElementById('percentText');
+const checks = document.querySelectorAll('.item input');
+const progress = document.getElementById('progressNum');
 
 function updateProgress(){
-  const total = departureChecks.length;
-  const done = Array.from(departureChecks).filter(item => item.checked).length;
-  const percent = Math.round(done / total * 100);
-
-  doneCount.textContent = done;
-  totalCount.textContent = total;
-  percentText.textContent = `${percent}% 準備完成`;
+  const total = checks.length;
+  const done = [...checks].filter(c=>c.checked).length;
+  const percent = Math.round((done/total)*100);
+  progress.textContent = percent + '%';
 }
 
-departureChecks.forEach(item => item.addEventListener('change', updateProgress));
+checks.forEach(c=>{
+  c.addEventListener('change',updateProgress);
+});
+
 updateProgress();
