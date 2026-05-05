@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>星建留學手帳｜大阪本町・西長堀篇</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div class="tiny-label">2026 STUDY ABROAD TECHO · OSAKA</div>
+      <h1>星建留學手帳</h1>
+      <p>小狐狸的日本留學冒險準備中</p>
+      <div class="route-card">
+        <span>🏫 修曼日本語專門學校｜大阪本町校</span>
+        <span>🏠 ドーミー西長堀</span>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="departure">✈️ 出発</button>
+      <button class="tab" data-tab="shopping">🛒 採買</button>
+      <button class="tab" data-tab="diary">📔 日記</button>
+      <button class="tab" data-tab="money">💴 記帳</button>
+      <button class="tab" data-tab="notion">🔗 Notion</button>
+    </nav>
+
+    <section id="departure" class="tab-panel active">
+      <div class="notebook-page">
+        <div class="tape tape-pink"></div>
+        <div class="stamp">準備中</div>
+        <h2>出発準備</h2>
+        <p class="subtitle">Departure Checklist</p>
+
+        <div class="progress-card">
+          <div class="ring">
+            <span id="doneCount">0</span>/<span id="totalCount">12</span>
+          </div>
+          <div>
+            <strong id="percentText">0% 準備完成</strong>
+            <p>完成一項，星星就亮一點 ✦</p>
+          </div>
+        </div>
+
+        <div class="section-title">🛂 簽證・入境手続き</div>
+        <label class="check-item"><input type="checkbox"> 確認護照有效期限</label>
+        <label class="check-item"><input type="checkbox"> 確認在留資格認定證明書 COE</label>
+        <label class="check-item"><input type="checkbox"> 申辦留學簽證</label>
+        <label class="check-item"><input type="checkbox"> 取得在留卡（抵日後）</label>
+
+        <div class="section-title">✈️ 航班・住宿</div>
+        <label class="check-item"><input type="checkbox"> 6/29 飛日本</label>
+        <label class="check-item"><input type="checkbox"> 6/29 ドーミー西長堀辦入住</label>
+        <label class="check-item"><input type="checkbox"> 確認宿舍入住規則</label>
+        <label class="check-item"><input type="checkbox"> 確認通學路線</label>
+
+        <div class="section-title">🏫 學校</div>
+        <label class="check-item"><input type="checkbox"> 7/1 新生說明會</label>
+        <label class="check-item"><input type="checkbox"> 準備學校文件</label>
+        <label class="check-item"><input type="checkbox"> 準備筆記本與文具</label>
+        <label class="check-item"><input type="checkbox"> 記下學校緊急聯絡資訊</label>
+      </div>
+
+      <div class="timeline-card">
+        <h3>重要時間軸</h3>
+        <div class="timeline">
+          <div class="time-row">
+            <span class="date">6/29</span>
+            <div>
+              <strong>飛日本・辦入住</strong>
+              <p>抵達大阪，前往ドーミー西長堀，開始真正生活。</p>
+            </div>
+          </div>
+          <div class="time-row">
+            <span class="date">6/30</span>
+            <div>
+              <strong>日用品採買日</strong>
+              <p>棉被、洗衣用品、延長線、小夜燈、馬克杯。</p>
+            </div>
+          </div>
+          <div class="time-row">
+            <span class="date">7/1</span>
+            <div>
+              <strong>新生說明會</strong>
+              <p>修曼日本語專門學校大阪本町校，正式展開新生活。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="shopping" class="tab-panel">
+      <div class="notebook-page">
+        <div class="tape tape-blue"></div>
+        <div class="stamp">採買</div>
+        <h2>抵達後採買</h2>
+        <p class="subtitle">Daily Goods Shopping List</p>
+
+        <div class="section-title">🛏️ 房間生活</div>
+        <label class="check-item"><input type="checkbox"> 棉被 / 枕頭 / 床包</label>
+        <label class="check-item"><input type="checkbox"> 衣架 / 收納盒</label>
+        <label class="check-item"><input type="checkbox"> 小夜燈</label>
+        <label class="check-item"><input type="checkbox"> 延長線 / 轉接頭</label>
+
+        <div class="section-title">🧴 盥洗清潔</div>
+        <label class="check-item"><input type="checkbox"> 洗髮精 / 沐浴乳</label>
+        <label class="check-item"><input type="checkbox"> 洗衣精 / 柔軟精</label>
+        <label class="check-item"><input type="checkbox"> 毛巾 / 浴巾</label>
+        <label class="check-item"><input type="checkbox"> 垃圾袋 / 清潔用品</label>
+
+        <div class="section-title">🍳 生活儀式感</div>
+        <label class="check-item"><input type="checkbox"> 喜歡的馬克杯</label>
+        <label class="check-item"><input type="checkbox"> 香香乳液</label>
+        <label class="check-item"><input type="checkbox"> 小狐狸娃娃 / 小擺件</label>
+      </div>
+    </section>
+
+    <section id="diary" class="tab-panel">
+      <div class="notebook-page">
+        <div class="tape tape-pink"></div>
+        <h2>留學日記</h2>
+        <p class="subtitle">Tiny diary for tiny brave steps</p>
+
+        <label class="field-label">今天的日期</label>
+        <input class="text-input" type="text" placeholder="2026 / 06 / 29" />
+
+        <label class="field-label">今天的小狐狸心情</label>
+        <textarea placeholder="今天也朝日本靠近了一點點……"></textarea>
+
+        <label class="field-label">今天完成的事</label>
+        <textarea placeholder="例：確認入住、買到第一個日本生活用馬克杯。"></textarea>
+      </div>
+    </section>
+
+    <section id="money" class="tab-panel">
+      <div class="notebook-page">
+        <div class="tape tape-blue"></div>
+        <h2>月記帳</h2>
+        <p class="subtitle">Osaka monthly budget memo</p>
+
+        <div class="budget-grid">
+          <div><span>房租 / 宿舍</span><strong>¥</strong></div>
+          <div><span>交通</span><strong>¥</strong></div>
+          <div><span>伙食</span><strong>¥</strong></div>
+          <div><span>日用品</span><strong>¥</strong></div>
+          <div><span>學習</span><strong>¥</strong></div>
+          <div><span>儀式感</span><strong>¥</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="notion" class="tab-panel">
+      <div class="notebook-page">
+        <div class="tape tape-pink"></div>
+        <h2>Notion Portal</h2>
+        <p class="subtitle">把重要連結都放在這裡</p>
+
+        <a class="link-card" href="#" target="_blank">📁 留學資料 Notion</a>
+        <a class="link-card" href="#" target="_blank">📝 日文學習 Notion</a>
+        <a class="link-card" href="#" target="_blank">🏠 住宿資訊</a>
+        <a class="link-card" href="#" target="_blank">🗺️ 大阪生活地圖</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>「願此刻暈光接住我，也願星建一步一步完成。」✦</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
