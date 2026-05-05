@@ -1,334 +1,342 @@
 
 :root{
---bg:#f5efe5;
---paper:#fffaf2;
---line:#e7ddcf;
---brown:#6e5c4e;
---gold:#c7aa79;
---pink:#e7d2cc;
---blue:#d8e0e4;
---shadow:rgba(90,70,50,.08);
+  --bg:#f6f1e8;
+  --paper:#fffdf7;
+  --paper2:#fbf4e8;
+  --ink:#4d4036;
+  --soft:#8a7a6b;
+  --line:#eadfce;
+  --gold:#c6a66f;
+  --green:#7d9773;
+  --pink:#efd8d5;
+  --blue:#dbe6ea;
+  --shadow:rgba(98,77,53,.10);
 }
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-margin:0;
-background:
-linear-gradient(to bottom,#ede7de,#f7f2ea);
-font-family:'Zen Maru Gothic',sans-serif;
-color:var(--brown);
-min-height:100vh;
-}
-
-.noise{
-position:fixed;
-inset:0;
-pointer-events:none;
-opacity:.03;
-background-image:
-radial-gradient(#000 0.6px, transparent 0.6px);
-background-size:8px 8px;
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255,255,255,.9), transparent 26%),
+    linear-gradient(180deg,#faf7f0 0%, var(--bg) 100%);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic","Noto Sans TC",sans-serif;
 }
 
 .app{
-width:min(680px,100%);
-margin:auto;
-padding:24px 18px 60px;
+  width:min(760px,100%);
+  margin:0 auto;
+  padding:24px 14px 50px;
 }
 
 .hero{
-position:relative;
-padding:32px 18px 20px;
-text-align:center;
+  text-align:center;
+  padding:28px 8px 18px;
 }
 
-.top-note{
-font-size:.72rem;
-letter-spacing:.35em;
-opacity:.5;
-margin-bottom:26px;
-}
-
-.paper-tape{
-position:absolute;
-width:120px;
-height:28px;
-background:rgba(255,255,255,.45);
-top:18px;
-}
-
-.tape-left{
-left:25px;
-transform:rotate(-8deg);
-}
-
-.tape-right{
-right:25px;
-transform:rotate(8deg);
+.eyebrow{
+  margin:0 0 18px;
+  font-size:.72rem;
+  letter-spacing:.18em;
+  color:var(--soft);
 }
 
 h1{
-font-family:'Shippori Mincho',serif;
-font-weight:500;
-font-size:3rem;
-margin:0;
-letter-spacing:.18em;
-color:#5c4c40;
+  margin:0;
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+  font-weight:500;
+  font-size:2.45rem;
+  letter-spacing:.16em;
 }
 
-.subtitle{
-margin-top:18px;
-font-size:1rem;
-opacity:.7;
-letter-spacing:.12em;
+.lead{
+  margin:16px 0 22px;
+  color:var(--soft);
+  letter-spacing:.08em;
 }
 
-.hero-card{
-position:relative;
-margin-top:28px;
-background:rgba(255,255,255,.55);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,.6);
-border-radius:28px;
-padding:24px;
-box-shadow:0 10px 30px var(--shadow);
-line-height:2;
+.info-card{
+  margin:0 auto;
+  width:min(520px,100%);
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(234,223,206,.9);
+  border-radius:26px;
+  padding:16px 18px;
+  box-shadow:0 10px 28px var(--shadow);
+  line-height:1.8;
 }
 
-.mini-sticker{
-position:absolute;
-right:18px;
-top:-10px;
-background:#fff;
-border-radius:999px;
-padding:7px 14px;
-font-size:.7rem;
-letter-spacing:.14em;
-border:1px solid #eee2d1;
-box-shadow:0 3px 10px rgba(0,0,0,.05);
-}
+.info-card p{margin:3px 0}
 
 .tabs{
-display:flex;
-gap:10px;
-overflow:auto;
-padding:12px 0 18px;
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding:12px 2px 16px;
 }
 
 .tab{
-border:none;
-background:#f6efe3;
-padding:14px 20px;
-border-radius:18px 18px 6px 6px;
-font-family:inherit;
-font-size:1rem;
-color:#6b594c;
-box-shadow:0 6px 15px var(--shadow);
-border:1px solid #efe5d7;
-flex-shrink:0;
+  flex-shrink:0;
+  border:1px solid #eadfce;
+  background:linear-gradient(#fffaf1,#f4e7cc);
+  color:#5b4a3d;
+  border-radius:18px;
+  padding:12px 18px;
+  font-size:1rem;
+  font-family:inherit;
+  box-shadow:0 5px 14px var(--shadow);
 }
 
 .tab.active{
-background:#fffaf2;
-transform:translateY(-3px);
+  background:var(--paper);
+  transform:translateY(-2px);
+  border-color:#e4d2b7;
 }
 
-.panel{
-display:none;
+.panel{display:none}
+.panel.active{display:block}
+
+.page{
+  position:relative;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(234,223,206,.75) 1px, transparent 1px),
+    var(--paper);
+  background-size:32px 32px;
+  border:1px solid rgba(234,223,206,.95);
+  border-radius:28px;
+  padding:34px 22px 26px;
+  box-shadow:0 14px 34px var(--shadow);
+  overflow:hidden;
+  margin-bottom:18px;
 }
 
-.panel.active{
-display:block;
+.page::before{
+  content:"";
+  position:absolute;
+  left:54px;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:rgba(225,178,174,.55);
 }
 
-.memo{
-position:relative;
-background:
-linear-gradient(var(--line) 1px, transparent 1px),
-var(--paper);
-background-size:100% 44px;
-border-radius:32px;
-padding:36px 26px;
-box-shadow:0 14px 35px var(--shadow);
-overflow:hidden;
+.tape{
+  position:absolute;
+  top:0;
+  left:44%;
+  width:118px;
+  height:26px;
+  background:rgba(239,216,213,.8);
+  transform:rotate(-1deg);
 }
 
-.memo::before{
-content:"";
-position:absolute;
-left:64px;
-top:0;
-bottom:0;
-width:2px;
-background:#e7c7c7;
-opacity:.7;
-}
+.tape.blue{background:rgba(219,230,234,.9)}
 
-.memo-pin{
-position:absolute;
-top:16px;
-left:50%;
-transform:translateX(-50%);
-width:16px;
-height:16px;
-background:#d9b18d;
-border-radius:50%;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
+.stamp{
+  position:absolute;
+  top:28px;
+  right:20px;
+  border:3px solid rgba(166,83,91,.65);
+  color:rgba(166,83,91,.75);
+  padding:8px 12px;
+  transform:rotate(-4deg);
+  letter-spacing:.14em;
 }
 
 h2{
-font-family:'Shippori Mincho',serif;
-font-size:2rem;
-font-weight:500;
-margin-top:8px;
-margin-bottom:26px;
-letter-spacing:.08em;
-color:#8a7056;
+  position:relative;
+  z-index:1;
+  margin:6px 0 4px;
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:2rem;
+  font-weight:500;
+  color:#9e7f50;
+  letter-spacing:.08em;
 }
 
-.progress-wrap{
-display:flex;
-align-items:center;
-gap:24px;
-margin-bottom:32px;
-background:rgba(255,255,255,.45);
-padding:18px;
-border-radius:24px;
-border:1px solid #efe3d1;
+.sub{
+  position:relative;
+  z-index:1;
+  margin:0 0 24px;
+  color:var(--soft);
+  letter-spacing:.12em;
 }
 
-.progress-circle{
-width:92px;
-height:92px;
-border-radius:50%;
-border:10px solid #eee3d2;
-border-top-color:#7f9778;
-display:grid;
-place-items:center;
-font-family:'Shippori Mincho',serif;
-font-size:1.2rem;
-background:#fffdf8;
+.progress-card{
+  position:relative;
+  z-index:1;
+  background:rgba(255,255,255,.68);
+  border:1px solid #eadfce;
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:22px;
 }
 
-.progress-text strong{
-font-weight:500;
-display:block;
-margin-bottom:8px;
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:12px;
 }
 
-.progress-text p{
-margin:0;
-opacity:.55;
-font-size:.9rem;
+.progress-top strong{
+  font-size:1.3rem;
+  color:#6b5846;
+}
+
+#percentText{
+  color:#6f7f64;
+  font-weight:700;
+}
+
+.progress-track{
+  width:100%;
+  height:16px;
+  background:#efe7da;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#8fa981,#c6a66f);
+  border-radius:999px;
+  transition:.25s ease;
+}
+
+.hint{
+  margin:12px 0 0;
+  color:var(--soft);
+  font-size:.92rem;
 }
 
 .checklist{
-display:flex;
-flex-direction:column;
-gap:14px;
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.item{
-display:flex;
-align-items:center;
-gap:16px;
-padding:10px 0;
-font-size:1.1rem;
+.checklist label{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:9px 0;
+  border-bottom:1px dashed rgba(155,132,105,.22);
+  font-size:1.05rem;
+  line-height:1.55;
 }
 
-.item input{
-width:24px;
-height:24px;
-accent-color:#889d82;
+input[type="checkbox"]{
+  width:23px;
+  height:23px;
+  accent-color:var(--green);
+  margin-top:2px;
+  flex-shrink:0;
+}
+
+.small-page{
+  padding-top:28px;
+}
+
+.timeline{
+  display:grid;
+  gap:13px;
+  position:relative;
+  z-index:1;
+}
+
+.timeline div{
+  display:grid;
+  grid-template-columns:74px 1fr;
+  gap:10px;
+  align-items:center;
+  background:rgba(255,255,255,.54);
+  border-radius:16px;
+  padding:12px;
+}
+
+.timeline b{
+  color:#9e7f50;
 }
 
 .shopping-grid{
-display:grid;
-gap:18px;
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:14px;
 }
 
-.shopping-card{
-background:rgba(255,255,255,.55);
-padding:18px;
-border-radius:22px;
-border:1px solid #eee4d7;
+.mini-card,
+.budget div{
+  background:rgba(255,255,255,.62);
+  border:1px solid #eadfce;
+  border-radius:20px;
+  padding:16px;
 }
 
-.shopping-card h3{
-margin-top:0;
-font-weight:500;
+.mini-card h3{
+  margin:0 0 8px;
+  color:#6b5846;
 }
 
-.shopping-card ul{
-padding-left:18px;
-line-height:2;
+.mini-card p{
+  margin:0;
+  color:var(--soft);
+  line-height:1.8;
 }
 
-.diary-title,
+.input,
 textarea{
-width:100%;
-border:none;
-background:rgba(255,255,255,.45);
-border-radius:20px;
-padding:18px;
-font-family:inherit;
-font-size:1rem;
-margin-bottom:18px;
-color:var(--brown);
-box-shadow:0 4px 14px rgba(0,0,0,.04);
+  position:relative;
+  z-index:1;
+  width:100%;
+  border:1px solid #eadfce;
+  background:rgba(255,255,255,.72);
+  border-radius:18px;
+  padding:15px;
+  color:var(--ink);
+  font-family:inherit;
+  font-size:1rem;
+  margin-bottom:14px;
 }
 
 textarea{
-min-height:180px;
-resize:vertical;
+  min-height:170px;
+  resize:vertical;
 }
 
-.budget-list{
-display:grid;
-gap:16px;
+.budget{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:12px;
 }
 
-.budget-list div{
-background:rgba(255,255,255,.5);
-padding:18px;
-border-radius:20px;
-display:flex;
-justify-content:space-between;
+.budget div{
+  display:flex;
+  justify-content:space-between;
 }
 
 footer{
-text-align:center;
-padding-top:30px;
-opacity:.65;
-font-size:.92rem;
-letter-spacing:.08em;
+  text-align:center;
+  color:var(--soft);
+  padding:18px 0 0;
+  font-size:.92rem;
 }
 
-@media(max-width:600px){
-
-.app{
-padding:18px 12px 40px;
-}
-
-h1{
-font-size:2.3rem;
-letter-spacing:.14em;
-}
-
-.memo{
-padding:30px 18px;
-}
-
-.memo::before{
-left:48px;
-}
-
-.progress-wrap{
-flex-direction:column;
-align-items:flex-start;
-}
-
+@media(max-width:520px){
+  .app{padding:16px 10px 44px}
+  h1{font-size:2.05rem;letter-spacing:.12em}
+  .page{padding:32px 17px 24px}
+  .page::before{left:42px}
+  .stamp{font-size:.82rem;right:14px}
+  h2{font-size:1.72rem}
+  .tab{padding:11px 15px}
 }

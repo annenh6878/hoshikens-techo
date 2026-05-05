@@ -2,195 +2,122 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>星建留學手帳</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>星建留學手帳</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">2026 ✦ OSAKA STUDY ABROAD TECHO</p>
+      <h1>星建留學手帳</h1>
+      <p class="lead">小狐狸的日本留學冒險準備中</p>
 
-<div class="noise"></div>
+      <div class="info-card">
+        <p>🏫 修曼日本語專門學校｜大阪本町校</p>
+        <p>🏠 ドーミー西長堀</p>
+        <p>✈️ 2026.06.29 出発予定</p>
+      </div>
+    </header>
 
-<main class="app">
+    <nav class="tabs">
+      <button class="tab active" data-tab="departure">✈️ 出発</button>
+      <button class="tab" data-tab="shopping">🧺 採買</button>
+      <button class="tab" data-tab="diary">📔 日記</button>
+      <button class="tab" data-tab="money">💴 記帳</button>
+    </nav>
 
-<header class="hero">
+    <section id="departure" class="panel active">
+      <article class="page">
+        <div class="tape"></div>
+        <div class="stamp">準備中</div>
 
-<div class="top-note">
-2026 ✧ OSAKA STUDY ABROAD TECHO
-</div>
+        <h2>出発準備</h2>
+        <p class="sub">Departure Checklist</p>
 
-<div class="paper-tape tape-left"></div>
-<div class="paper-tape tape-right"></div>
+        <div class="progress-card">
+          <div class="progress-top">
+            <strong><span id="doneCount">0</span> / <span id="totalCount">6</span></strong>
+            <span id="percentText">0% 準備完成</span>
+          </div>
+          <div class="progress-track">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+          <p class="hint">完成一項，星星就亮一點 ✦</p>
+        </div>
 
-<h1>星建留學手帳</h1>
+        <div class="checklist">
+          <label><input type="checkbox">確認護照有效期限</label>
+          <label><input type="checkbox">申辦留學簽證</label>
+          <label><input type="checkbox">6/29 飛日本</label>
+          <label><input type="checkbox">6/29 ドーミー西長堀入住</label>
+          <label><input type="checkbox">6/30 採買日用品</label>
+          <label><input type="checkbox">7/1 新生說明會</label>
+        </div>
+      </article>
 
-<p class="subtitle">
-小狐狸的日本留學冒險準備中
-</p>
+      <article class="page small-page">
+        <h2>重要時間軸</h2>
+        <div class="timeline">
+          <div><b>6/29</b><span>飛日本・宿舍入住</span></div>
+          <div><b>6/30</b><span>日用品採買日</span></div>
+          <div><b>7/1</b><span>新生說明會</span></div>
+        </div>
+      </article>
+    </section>
 
-<div class="hero-card">
-<div class="mini-sticker">NEW LIFE</div>
+    <section id="shopping" class="panel">
+      <article class="page">
+        <div class="tape blue"></div>
+        <h2>採買清單</h2>
+        <p class="sub">Daily Goods Shopping List</p>
 
-<p>🏫 修曼日本語專門學校｜大阪本町校</p>
-<p>🏠 ドーミー西長堀</p>
-<p>✈️ 2026.06.29 出発予定</p>
-</div>
+        <div class="shopping-grid">
+          <div class="mini-card">
+            <h3>🛏️ 房間</h3>
+            <p>棉被、衣架、小夜燈、收納盒</p>
+          </div>
+          <div class="mini-card">
+            <h3>🧴 生活</h3>
+            <p>洗衣精、毛巾、吹風機、垃圾袋</p>
+          </div>
+          <div class="mini-card">
+            <h3>☕ 儀式感</h3>
+            <p>馬克杯、香香乳液、小狐狸擺件</p>
+          </div>
+        </div>
+      </article>
+    </section>
 
-</header>
+    <section id="diary" class="panel">
+      <article class="page">
+        <div class="tape"></div>
+        <h2>留學日記</h2>
+        <p class="sub">Tiny diary for tiny brave steps</p>
+        <input class="input" placeholder="2026 / 06 / 29">
+        <textarea placeholder="今天也朝日本靠近了一點點……"></textarea>
+      </article>
+    </section>
 
-<nav class="tabs">
-<button class="tab active" data-tab="departure">✈ 出発</button>
-<button class="tab" data-tab="shopping">🧺 採買</button>
-<button class="tab" data-tab="diary">📔 日記</button>
-<button class="tab" data-tab="money">💴 記帳</button>
-</nav>
+    <section id="money" class="panel">
+      <article class="page">
+        <div class="tape blue"></div>
+        <h2>月記帳</h2>
+        <p class="sub">Osaka Monthly Budget</p>
 
-<section class="panel active" id="departure">
+        <div class="budget">
+          <div>🏠 宿舍 <span>¥</span></div>
+          <div>🚃 交通 <span>¥</span></div>
+          <div>🍙 伙食 <span>¥</span></div>
+          <div>🧺 日用品 <span>¥</span></div>
+        </div>
+      </article>
+    </section>
 
-<div class="memo">
-<div class="memo-pin"></div>
+    <footer>「今天也朝日本靠近了一點點。」🌸</footer>
+  </main>
 
-<h2>Departure Checklist</h2>
-
-<div class="progress-wrap">
-<div class="progress-circle">
-<span id="progressNum">0%</span>
-</div>
-
-<div class="progress-text">
-<strong>完成一項，星星就亮一點 ✦</strong>
-<p>Little fox is getting closer to Japan.</p>
-</div>
-</div>
-
-<div class="checklist">
-
-<label class="item">
-<input type="checkbox">
-<span>確認護照有效期限</span>
-</label>
-
-<label class="item">
-<input type="checkbox">
-<span>申辦留學簽證</span>
-</label>
-
-<label class="item">
-<input type="checkbox">
-<span>6/29 飛日本</span>
-</label>
-
-<label class="item">
-<input type="checkbox">
-<span>6/29 ドーミー西長堀入住</span>
-</label>
-
-<label class="item">
-<input type="checkbox">
-<span>6/30 採買日用品</span>
-</label>
-
-<label class="item">
-<input type="checkbox">
-<span>7/1 新生說明會</span>
-</label>
-
-</div>
-</div>
-
-</section>
-
-<section class="panel" id="shopping">
-
-<div class="memo">
-
-<div class="memo-pin"></div>
-
-<h2>Shopping List</h2>
-
-<div class="shopping-grid">
-
-<div class="shopping-card">
-<h3>🛏 房間</h3>
-<ul>
-<li>棉被</li>
-<li>衣架</li>
-<li>小夜燈</li>
-</ul>
-</div>
-
-<div class="shopping-card">
-<h3>🧴 生活</h3>
-<ul>
-<li>洗衣精</li>
-<li>毛巾</li>
-<li>吹風機</li>
-</ul>
-</div>
-
-<div class="shopping-card">
-<h3>☕ 儀式感</h3>
-<ul>
-<li>馬克杯</li>
-<li>香香乳液</li>
-<li>小狐狸擺件</li>
-</ul>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="panel" id="diary">
-
-<div class="memo">
-
-<div class="memo-pin"></div>
-
-<h2>Diary</h2>
-
-<input class="diary-title" placeholder="2026 / 06 / 29">
-
-<textarea placeholder="今天第一次走進大阪的空氣裡。"></textarea>
-
-</div>
-
-</section>
-
-<section class="panel" id="money">
-
-<div class="memo">
-
-<div class="memo-pin"></div>
-
-<h2>Monthly Budget</h2>
-
-<div class="budget-list">
-<div>🏠 房租 <span>¥</span></div>
-<div>🚃 交通 <span>¥</span></div>
-<div>🍙 伙食 <span>¥</span></div>
-<div>🧺 日用品 <span>¥</span></div>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-「今天也朝日本靠近了一點點。」🌸
-</footer>
-
-</main>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
