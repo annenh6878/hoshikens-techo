@@ -1,1 +1,198 @@
-<!DOCTYPE html><html><body><h1>星建 v5</h1></body></html>
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>星建留學手帳 v8</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="cover journal-card">
+      <span class="cloud"></span>
+      <span class="dot dot-a"></span>
+      <span class="dot dot-b"></span>
+      <p class="kicker">2026 ✧ OSAKA STUDY ABROAD TECHO</p>
+      <h1>星建留學手帳</h1>
+      <p class="sub">Anne の 留學冒險準備中</p>
+
+      <div class="cover-note">
+        <span class="wash wash-cover"></span>
+        <p>🏫 修曼日本語專門學校｜大阪本町校</p>
+        <p>🏠 ドーミー西長堀</p>
+        <p>✈️ 2026.06.29 出発予定</p>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="departure">✈️ 出発</button>
+      <button class="tab" data-tab="shopping">🧺 採買</button>
+      <button class="tab" data-tab="diary">📔 日記</button>
+      <button class="tab" data-tab="money">💴 記帳</button>
+    </nav>
+
+    <section id="departure" class="panel active">
+      <article class="journal-card page">
+        <span class="watercolor blue"></span>
+        <span class="watercolor purple"></span>
+        <span class="round r1"></span>
+        <span class="round r2"></span>
+
+        <div class="page-title">
+          <span class="num">01</span>
+          <div>
+            <h2>出発準備</h2>
+            <p>Departure Checklist</p>
+          </div>
+        </div>
+
+        <div class="progress-box">
+          <div class="progress-meta">
+            <strong><span id="departureDone">0</span> / <span id="departureTotal">0</span></strong>
+            <span><span id="departurePercent">0%</span> 完成</span>
+          </div>
+          <div class="progress-line"><div id="departureProgress" class="progress-fill"></div></div>
+          <p class="small-note">完成一項，星星就亮一點 ✦</p>
+        </div>
+
+        <div id="departureList" class="editable-list"></div>
+
+        <div class="add-card">
+          <p>＋ 新增出発準備</p>
+          <form class="add-form" data-list="departure">
+            <input type="text" placeholder="例如：6/28 確認行李重量" />
+            <button type="submit">新增</button>
+          </form>
+        </div>
+      </article>
+
+      <article class="journal-card page">
+        <span class="watercolor pink"></span>
+        <div class="page-title">
+          <span class="num">☆</span>
+          <div>
+            <h2>重要時間軸</h2>
+            <p>Important Schedule</p>
+          </div>
+        </div>
+
+        <div id="timelineList" class="timeline-list"></div>
+
+        <div class="add-card">
+          <p>＋ 新增日期行程</p>
+          <form id="timelineForm" class="timeline-form">
+            <input id="timelineDate" type="date" />
+            <input id="timelineText" type="text" placeholder="例如：到區役所辦手續" />
+            <button type="submit">新增</button>
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <section id="shopping" class="panel">
+      <article class="journal-card page">
+        <span class="watercolor purple"></span>
+        <span class="watercolor blue bottom"></span>
+        <span class="round r3"></span>
+
+        <div class="page-title">
+          <span class="num">02</span>
+          <div>
+            <h2>採買清單</h2>
+            <p>Daily Goods Shopping List</p>
+          </div>
+        </div>
+
+        <div class="progress-box">
+          <div class="progress-meta">
+            <strong><span id="shoppingDone">0</span> / <span id="shoppingTotal">0</span></strong>
+            <span><span id="shoppingPercent">0%</span> 完成</span>
+          </div>
+          <div class="progress-line"><div id="shoppingProgress" class="progress-fill"></div></div>
+          <p class="small-note">買一樣，生活就更靠近一點。</p>
+        </div>
+
+        <div id="shoppingList" class="editable-list"></div>
+
+        <div class="add-card">
+          <p>＋ 新增採買項目</p>
+          <form class="add-form" data-list="shopping">
+            <input type="text" placeholder="例如：浴室拖鞋 / 洗衣袋 / 小夜燈" />
+            <button type="submit">新增</button>
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <section id="diary" class="panel">
+      <article class="journal-card page">
+        <span class="watercolor blue"></span>
+        <span class="watercolor purple bottom"></span>
+        <span class="round r1"></span>
+
+        <div class="page-title">
+          <span class="num">03</span>
+          <div>
+            <h2>Anneの留學日記</h2>
+            <p>Diary / 日々の小さな記録</p>
+          </div>
+        </div>
+
+        <label class="field-label">日期</label>
+        <input id="diaryDate" class="date-input" type="date" value="2026-06-29" />
+        <p id="jpDate" class="jp-date"></p>
+
+        <label class="field-label">今日心情</label>
+        <textarea id="diaryMood" placeholder="今天的小狐狸心情是……"></textarea>
+
+        <label class="field-label">今日紀錄</label>
+        <textarea id="diaryText" placeholder="今天也朝日本靠近了一點點。"></textarea>
+
+        <div class="media-grid">
+          <div class="photo-card">
+            <label for="photoInput">📷 上傳照片</label>
+            <input id="photoInput" type="file" accept="image/*" />
+            <img id="photoPreview" alt="" />
+            <button id="clearPhoto" type="button">移除照片</button>
+          </div>
+
+          <div class="draw-card">
+            <p>✏️ 小塗鴉區</p>
+            <canvas id="drawCanvas" width="320" height="220"></canvas>
+            <div class="draw-actions">
+              <button id="clearCanvas" type="button">清空</button>
+              <button id="saveCanvas" type="button">保存塗鴉</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="money" class="panel">
+      <article class="journal-card page">
+        <span class="watercolor purple"></span>
+        <div class="page-title">
+          <span class="num">04</span>
+          <div>
+            <h2>月記帳</h2>
+            <p>Osaka Monthly Budget</p>
+          </div>
+        </div>
+
+        <div class="budget-grid">
+          <div>🏠 宿舍 <span>¥</span></div>
+          <div>🚃 交通 <span>¥</span></div>
+          <div>🍙 伙食 <span>¥</span></div>
+          <div>🧺 日用品 <span>¥</span></div>
+          <div>☕ 儀式感 <span>¥</span></div>
+        </div>
+      </article>
+    </section>
+
+    <footer>「今日も少し、日本に近づいた。」🌸</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
