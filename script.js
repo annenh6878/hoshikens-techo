@@ -5,20 +5,21 @@ const defaultLists = {
     { text: "申辦留學簽證", done: false },
     { text: "6/29 飛日本", done: false },
     { text: "6/29 ドーミー西長堀入住", done: false },
-    { text: "6/30 採買日用品", done: false },
     { text: "7/1 新生說明會", done: false }
   ],
-  shopping: [
+  shoppingBefore: [
+    { text: "轉接頭", done: false },
+    { text: "文件夾", done: false },
+    { text: "旅行收納袋", done: false },
+    { text: "常備藥", done: false }
+  ],
+  shoppingAfter: [
     { text: "棉被 / 枕頭 / 床包", done: false },
     { text: "衣架 / 收納盒", done: false },
     { text: "小夜燈", done: false },
     { text: "延長線 / 轉接頭", done: false },
-    { text: "洗髮精 / 沐浴乳", done: false },
     { text: "洗衣精 / 柔軟精", done: false },
-    { text: "毛巾 / 浴巾", done: false },
-    { text: "馬克杯", done: false },
-    { text: "香香乳液", done: false },
-    { text: "小狐狸小擺件", done: false }
+    { text: "馬克杯", done: false }
   ]
 };
 
@@ -28,19 +29,29 @@ const defaultTimeline = [
   { date: "2026-07-01", text: "新生說明會" }
 ];
 
+const defaultBudget = [
+  { name: "宿舍", amount: 0 },
+  { name: "交通", amount: 0 },
+  { name: "伙食", amount: 0 },
+  { name: "日用品", amount: 0 },
+  { name: "儀式感", amount: 0 }
+];
+
 const state = {
   departure: load("departure", defaultLists.departure),
-  shopping: load("shopping", defaultLists.shopping),
-  timeline: load("timeline", defaultTimeline)
+  shoppingBefore: load("shoppingBefore", defaultLists.shoppingBefore),
+  shoppingAfter: load("shoppingAfter", defaultLists.shoppingAfter),
+  timeline: load("timeline", defaultTimeline),
+  budget: load("budget", defaultBudget)
 };
 
 function load(key, fallback){
-  const saved = localStorage.getItem(`hoshiken-v8-full-${key}`);
+  const saved = localStorage.getItem(`hoshiken-v9-${key}`);
   return saved ? JSON.parse(saved) : fallback;
 }
 
 function save(key){
-  localStorage.setItem(`hoshiken-v8-full-${key}`, JSON.stringify(state[key]));
+  localStorage.setItem(`hoshiken-v9-${key}`, JSON.stringify(state[key]));
 }
 
 function renderList(name){
@@ -127,6 +138,20 @@ function renderTimeline(){
     const text = document.createElement("div");
     text.textContent = item.text;
 
+    const edit = document.createElement("button");
+    edit.className = "edit-btn";
+    edit.type = "button";
+    edit.textContent = "修改";
+    edit.addEventListener("click", () => {
+      const newDate = prompt("修改日期（YYYY-MM-DD）", item.date);
+      if(!newDate) return;
+      const newText = prompt("修改行程內容", item.text);
+      if(!newText) return;
+      state.timeline[realIndex] = { date: newDate, text: newText.trim() };
+      save("timeline");
+      renderTimeline();
+    });
+
     const del = document.createElement("button");
     del.className = "delete-btn";
     del.type = "button";
@@ -139,6 +164,7 @@ function renderTimeline(){
 
     row.appendChild(date);
     row.appendChild(text);
+    row.appendChild(edit);
     row.appendChild(del);
     container.appendChild(row);
   });
@@ -158,6 +184,73 @@ document.getElementById("timelineForm").addEventListener("submit", event => {
   textInput.value = "";
   save("timeline");
   renderTimeline();
+});
+
+function renderBudget(){
+  const container = document.getElementById("budgetList");
+  container.innerHTML = "";
+
+  state.budget.forEach((item, index) => {
+    const row = document.createElement("div");
+    row.className = "budget-row";
+
+    const name = document.createElement("div");
+    name.className = "budget-name";
+    name.textContent = item.name;
+
+    const amount = document.createElement("div");
+    amount.className = "budget-amount";
+    amount.textContent = `¥ ${Number(item.amount || 0).toLocaleString()}`;
+
+    const del = document.createElement("button");
+    del.className = "delete-btn";
+    del.type = "button";
+    del.textContent = "×";
+    del.addEventListener("click", () => {
+      state.budget.splice(index, 1);
+      save("budget");
+      renderBudget();
+    });
+
+    row.addEventListener("click", (event) => {
+      if(event.target === del) return;
+      const newName = prompt("修改分類名稱", item.name);
+      if(!newName) return;
+      const newAmount = prompt("修改金額", item.amount);
+      if(newAmount === null) return;
+      state.budget[index] = { name: newName.trim(), amount: Number(newAmount) || 0 };
+      save("budget");
+      renderBudget();
+    });
+
+    row.appendChild(name);
+    row.appendChild(amount);
+    row.appendChild(del);
+    container.appendChild(row);
+  });
+
+  updateBudgetTotal();
+}
+
+function updateBudgetTotal(){
+  const total = state.budget.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+  document.getElementById("budgetTotal").textContent = total.toLocaleString();
+}
+
+document.getElementById("budgetForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const nameInput = document.getElementById("budgetName");
+  const amountInput = document.getElementById("budgetAmount");
+  const name = nameInput.value.trim();
+  const amount = Number(amountInput.value) || 0;
+
+  if(!name) return;
+
+  state.budget.push({ name, amount });
+  nameInput.value = "";
+  amountInput.value = "";
+  save("budget");
+  renderBudget();
 });
 
 function formatShortDate(value){
@@ -215,7 +308,7 @@ const photoInput = document.getElementById("photoInput");
 const photoPreview = document.getElementById("photoPreview");
 const clearPhoto = document.getElementById("clearPhoto");
 
-const savedPhoto = localStorage.getItem("hoshiken-v8-full-photo");
+const savedPhoto = localStorage.getItem("hoshiken-v9-photo");
 if(savedPhoto){
   photoPreview.src = savedPhoto;
   photoPreview.style.display = "block";
@@ -230,13 +323,13 @@ photoInput.addEventListener("change", () => {
     photoPreview.src = reader.result;
     photoPreview.style.display = "block";
     clearPhoto.style.display = "block";
-    localStorage.setItem("hoshiken-v8-full-photo", reader.result);
+    localStorage.setItem("hoshiken-v9-photo", reader.result);
   };
   reader.readAsDataURL(file);
 });
 
 clearPhoto.addEventListener("click", () => {
-  localStorage.removeItem("hoshiken-v8-full-photo");
+  localStorage.removeItem("hoshiken-v9-photo");
   photoPreview.removeAttribute("src");
   photoPreview.style.display = "none";
   clearPhoto.style.display = "none";
@@ -252,7 +345,7 @@ function setupCanvas(){
   ctx.lineWidth = 3;
   ctx.lineCap = "round";
   ctx.strokeStyle = "#7e6ea1";
-  const saved = localStorage.getItem("hoshiken-v8-full-drawing");
+  const saved = localStorage.getItem("hoshiken-v9-drawing");
   if(saved){
     const img = new Image();
     img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -299,15 +392,17 @@ canvas.addEventListener("touchend", stopDraw);
 
 document.getElementById("clearCanvas").addEventListener("click", () => {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  localStorage.removeItem("hoshiken-v8-full-drawing");
+  localStorage.removeItem("hoshiken-v9-drawing");
 });
 
 document.getElementById("saveCanvas").addEventListener("click", () => {
-  localStorage.setItem("hoshiken-v8-full-drawing", canvas.toDataURL("image/png"));
+  localStorage.setItem("hoshiken-v9-drawing", canvas.toDataURL("image/png"));
 });
 
 renderList("departure");
-renderList("shopping");
+renderList("shoppingBefore");
+renderList("shoppingAfter");
 renderTimeline();
+renderBudget();
 updateJapaneseDate();
 setupCanvas();

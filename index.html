@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>星建留學手帳 v8</title>
+  <title>星建留學手帳 v9</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -27,6 +27,7 @@
 
     <nav class="tabs">
       <button class="tab active" data-tab="departure">✈️ 出発</button>
+      <button class="tab" data-tab="timeline">🗓️ 時間軸</button>
       <button class="tab" data-tab="shopping">🧺 採買</button>
       <button class="tab" data-tab="diary">📔 日記</button>
       <button class="tab" data-tab="money">💴 記帳</button>
@@ -66,14 +67,19 @@
           </form>
         </div>
       </article>
+    </section>
 
+    <section id="timeline" class="panel">
       <article class="journal-card page">
         <span class="watercolor pink"></span>
+        <span class="watercolor blue bottom"></span>
+        <span class="round r3"></span>
+
         <div class="page-title">
-          <span class="num">☆</span>
+          <span class="num">02</span>
           <div>
             <h2>重要時間軸</h2>
-            <p>Important Schedule</p>
+            <p>Editable Important Schedule</p>
           </div>
         </div>
 
@@ -97,30 +103,49 @@
         <span class="round r3"></span>
 
         <div class="page-title">
-          <span class="num">02</span>
+          <span class="num">03</span>
           <div>
             <h2>採買清單</h2>
-            <p>Daily Goods Shopping List</p>
+            <p>Before Departure / After Arrival</p>
           </div>
         </div>
 
-        <div class="progress-box">
-          <div class="progress-meta">
-            <strong><span id="shoppingDone">0</span> / <span id="shoppingTotal">0</span></strong>
-            <span><span id="shoppingPercent">0%</span> 完成</span>
+        <div class="shopping-section">
+          <h3>出發前 ✈️</h3>
+          <div class="progress-box compact">
+            <div class="progress-meta">
+              <strong><span id="shoppingBeforeDone">0</span> / <span id="shoppingBeforeTotal">0</span></strong>
+              <span><span id="shoppingBeforePercent">0%</span> 完成</span>
+            </div>
+            <div class="progress-line"><div id="shoppingBeforeProgress" class="progress-fill"></div></div>
           </div>
-          <div class="progress-line"><div id="shoppingProgress" class="progress-fill"></div></div>
-          <p class="small-note">買一樣，生活就更靠近一點。</p>
+          <div id="shoppingBeforeList" class="editable-list"></div>
+          <div class="add-card">
+            <p>＋ 新增出發前採買</p>
+            <form class="add-form" data-list="shoppingBefore">
+              <input type="text" placeholder="例如：轉接頭 / 文件夾 / 旅行收納袋" />
+              <button type="submit">新增</button>
+            </form>
+          </div>
         </div>
 
-        <div id="shoppingList" class="editable-list"></div>
-
-        <div class="add-card">
-          <p>＋ 新增採買項目</p>
-          <form class="add-form" data-list="shopping">
-            <input type="text" placeholder="例如：浴室拖鞋 / 洗衣袋 / 小夜燈" />
-            <button type="submit">新增</button>
-          </form>
+        <div class="shopping-section">
+          <h3>抵日後 🇯🇵</h3>
+          <div class="progress-box compact">
+            <div class="progress-meta">
+              <strong><span id="shoppingAfterDone">0</span> / <span id="shoppingAfterTotal">0</span></strong>
+              <span><span id="shoppingAfterPercent">0%</span> 完成</span>
+            </div>
+            <div class="progress-line"><div id="shoppingAfterProgress" class="progress-fill"></div></div>
+          </div>
+          <div id="shoppingAfterList" class="editable-list"></div>
+          <div class="add-card">
+            <p>＋ 新增抵日後採買</p>
+            <form class="add-form" data-list="shoppingAfter">
+              <input type="text" placeholder="例如：棉被 / 洗衣精 / 馬克杯" />
+              <button type="submit">新增</button>
+            </form>
+          </div>
         </div>
       </article>
     </section>
@@ -132,7 +157,7 @@
         <span class="round r1"></span>
 
         <div class="page-title">
-          <span class="num">03</span>
+          <span class="num">04</span>
           <div>
             <h2>Anneの留學日記</h2>
             <p>Diary / 日々の小さな記録</p>
@@ -172,20 +197,30 @@
     <section id="money" class="panel">
       <article class="journal-card page">
         <span class="watercolor purple"></span>
+        <span class="watercolor blue bottom"></span>
+
         <div class="page-title">
-          <span class="num">04</span>
+          <span class="num">05</span>
           <div>
             <h2>月記帳</h2>
-            <p>Osaka Monthly Budget</p>
+            <p>Editable Osaka Monthly Budget</p>
           </div>
         </div>
 
-        <div class="budget-grid">
-          <div>🏠 宿舍 <span>¥</span></div>
-          <div>🚃 交通 <span>¥</span></div>
-          <div>🍙 伙食 <span>¥</span></div>
-          <div>🧺 日用品 <span>¥</span></div>
-          <div>☕ 儀式感 <span>¥</span></div>
+        <div class="total-card">
+          <p>月總計</p>
+          <strong>¥ <span id="budgetTotal">0</span></strong>
+        </div>
+
+        <div id="budgetList" class="budget-list"></div>
+
+        <div class="add-card">
+          <p>＋ 新增記帳分類</p>
+          <form id="budgetForm" class="budget-form">
+            <input id="budgetName" type="text" placeholder="分類名稱，例如：交通 / 伙食" />
+            <input id="budgetAmount" type="number" inputmode="numeric" placeholder="金額" />
+            <button type="submit">新增</button>
+          </form>
         </div>
       </article>
     </section>
