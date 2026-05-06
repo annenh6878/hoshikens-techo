@@ -1,12 +1,32 @@
 
 const defaultLists = {
   departure: [
-    { text: "確認護照有效期限", done: false },
-    { text: "申辦留學簽證", done: false },
-    { text: "6/29 飛日本", done: false },
-    { text: "6/29 ドーミー西長堀入住", done: false },
-    { text: "7/1 新生說明會", done: false }
-  ],
+  {
+    date: "2026-06-01",
+    text: "確認護照有效期限",
+    done: false
+  },
+  {
+    date: "2026-06-10",
+    text: "申辦留學簽證",
+    done: false
+  },
+  {
+    date: "2026-06-29",
+    text: "飛日本",
+    done: false
+  },
+  {
+    date: "2026-06-29",
+    text: "ドーミー西長堀入住",
+    done: false
+  },
+  {
+    date: "2026-07-01",
+    text: "新生說明會",
+    done: false
+  }
+],
   shoppingBefore: [
     { text: "轉接頭", done: false },
     { text: "文件夾", done: false },
@@ -58,7 +78,10 @@ function renderList(name){
   const container = document.getElementById(`${name}List`);
   container.innerHTML = "";
 
-  state[name].forEach((item, index) => {
+  state[name]
+  .slice()
+  .sort((a, b) => (a.date || "9999-12-31").localeCompare(b.date || "9999-12-31"))
+  .forEach((item, index) => {
     const row = document.createElement("div");
     row.className = "list-row";
 
@@ -114,8 +137,20 @@ document.querySelectorAll(".add-form").forEach(form => {
     const input = form.querySelector("input");
     const text = input.value.trim();
     if(!text) return;
+function extractDate(text) {
+  const match = text.match(/(\d{1,2})\/(\d{1,2})/);
+  if (!match) return "9999-12-31";
 
-    state[name].push({ text, done:false });
+  const month = match[1].padStart(2, "0");
+  const day = match[2].padStart(2, "0");
+
+  return `2026-${month}-${day}`;
+}
+    state[name].push({ 
+  date: extractDate(text), 
+  text, 
+  done:false 
+});
     input.value = "";
     save(name);
     renderList(name);
