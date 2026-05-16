@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>星建留學手帳 v9</title>
+  <title>星建留學手帳 v11</title>
   <link rel="stylesheet" href="style.css" />
-<link rel="apple-touch-icon" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
   <main class="app">
@@ -31,6 +31,7 @@
       <button class="tab" data-tab="timeline">🗓️ 時間軸</button>
       <button class="tab" data-tab="shopping">🧺 採買</button>
       <button class="tab" data-tab="diary">📔 日記</button>
+      <button class="tab" data-tab="map">🗺️ 地圖</button>
       <button class="tab" data-tab="money">💴 記帳</button>
     </nav>
 
@@ -195,13 +196,58 @@
       </article>
     </section>
 
+
+    <section id="map" class="panel">
+      <article class="journal-card page">
+        <span class="watercolor blue"></span>
+        <span class="watercolor pink bottom"></span>
+        <span class="round r2"></span>
+
+        <div class="page-title">
+          <span class="num">05</span>
+          <div>
+            <h2>散策地圖</h2>
+            <p>Cafe / Shop / Place Journal</p>
+          </div>
+        </div>
+
+        <div class="map-intro">
+          <strong>🗺️ Anne の 探店紀錄</strong>
+          <p>把去過的咖啡廳、書店、展覽、街角，慢慢貼成自己的大阪生活地圖。</p>
+        </div>
+
+        <div id="placeList" class="place-list"></div>
+
+        <div class="add-card">
+          <p>＋ 新增探店紀錄</p>
+          <form id="placeForm" class="place-form">
+            <input id="placeDate" type="date" />
+            <input id="placeName" type="text" placeholder="店名 / 地點名稱" />
+            <input id="placeArea" type="text" placeholder="地區，例如：中崎町 / 難波" />
+            <select id="placeType">
+              <option value="☕ 咖啡廳">☕ 咖啡廳</option>
+              <option value="📚 書店">📚 書店</option>
+              <option value="🎨 展覽">🎨 展覽</option>
+              <option value="🛒 採買">🛒 採買</option>
+              <option value="🌸 景點">🌸 景點</option>
+              <option value="✨ 其他">✨ 其他</option>
+            </select>
+            <textarea id="placeNote" placeholder="心得，例如：窗邊光很好、適合畫畫、拿鐵偏苦但很香。"></textarea>
+            <label class="upload-label" for="placeImage">📷 上傳照片 / 速寫</label>
+            <input id="placeImage" type="file" accept="image/*" />
+            <button type="submit">新增紀錄</button>
+          </form>
+        </div>
+      </article>
+    </section>
+
     <section id="money" class="panel">
       <article class="journal-card page">
         <span class="watercolor purple"></span>
         <span class="watercolor blue bottom"></span>
 
         <div class="page-title">
-          <span class="num">05</span>
+          <span class="num">06</span>
           <div>
             <h2>月記帳</h2>
             <p>Editable Osaka Monthly Budget</p>

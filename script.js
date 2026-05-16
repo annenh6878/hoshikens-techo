@@ -1,32 +1,12 @@
 
 const defaultLists = {
   departure: [
-  {
-    date: "2026-06-01",
-    text: "確認護照有效期限",
-    done: false
-  },
-  {
-    date: "2026-06-10",
-    text: "申辦留學簽證",
-    done: false
-  },
-  {
-    date: "2026-06-29",
-    text: "飛日本",
-    done: false
-  },
-  {
-    date: "2026-06-29",
-    text: "ドーミー西長堀入住",
-    done: false
-  },
-  {
-    date: "2026-07-01",
-    text: "新生說明會",
-    done: false
-  }
-],
+    { text: "確認護照有效期限", done: false },
+    { text: "申辦留學簽證", done: false },
+    { text: "6/29 飛日本", done: false },
+    { text: "6/29 ドーミー西長堀入住", done: false },
+    { text: "7/1 新生說明會", done: false }
+  ],
   shoppingBefore: [
     { text: "轉接頭", done: false },
     { text: "文件夾", done: false },
@@ -62,7 +42,8 @@ const state = {
   shoppingBefore: load("shoppingBefore", defaultLists.shoppingBefore),
   shoppingAfter: load("shoppingAfter", defaultLists.shoppingAfter),
   timeline: load("timeline", defaultTimeline),
-  budget: load("budget", defaultBudget)
+  budget: load("budget", defaultBudget),
+  places: load("places", [])
 };
 
 function load(key, fallback){
@@ -78,10 +59,7 @@ function renderList(name){
   const container = document.getElementById(`${name}List`);
   container.innerHTML = "";
 
-  state[name]
-  .slice()
-  .sort((a, b) => (a.date || "9999-12-31").localeCompare(b.date || "9999-12-31"))
-  .forEach((item, index) => {
+  state[name].forEach((item, index) => {
     const row = document.createElement("div");
     row.className = "list-row";
 
@@ -97,36 +75,7 @@ function renderList(name){
     const text = document.createElement("div");
     text.className = "item-text";
     text.textContent = item.text;
-const edit = document.createElement("button");
-edit.className = "edit-btn";
-edit.type = "button";
-edit.textContent = "修改";
-edit.addEventListener("click", () => {
-  const newText = prompt("修改項目", item.text);
-  if (!newText) return;
 
-  state[name][index].text = newText.trim();
-  state[name][index].date = extractDate(newText.trim());
-
-  save(name);
-  renderList(name);
-});
-const edit = document.createElement("button");
-edit.className = "edit-btn";
-edit.type = "button";
-edit.textContent = "修改";
-
-edit.addEventListener("click", () => {
-  const newText = prompt("修改項目", item.text);
-
-  if (!newText) return;
-
-  state[name][index].text = newText.trim();
-  state[name][index].date = extractDate(newText.trim());
-
-  save(name);
-  renderList(name);
-});
     const del = document.createElement("button");
     del.className = "delete-btn";
     del.type = "button";
@@ -140,9 +89,7 @@ edit.addEventListener("click", () => {
 
     row.appendChild(checkbox);
     row.appendChild(text);
-    row.appendChild(edit);
     row.appendChild(del);
-    row.appendChild(edit);
     container.appendChild(row);
   });
 
@@ -168,20 +115,8 @@ document.querySelectorAll(".add-form").forEach(form => {
     const input = form.querySelector("input");
     const text = input.value.trim();
     if(!text) return;
-function extractDate(text) {
-  const match = text.match(/(\d{1,2})\/(\d{1,2})/);
-  if (!match) return "9999-12-31";
 
-  const month = match[1].padStart(2, "0");
-  const day = match[2].padStart(2, "0");
-
-  return `2026-${month}-${day}`;
-}
-    state[name].push({ 
-  date: extractDate(text), 
-  text, 
-  done:false 
-});
+    state[name].push({ text, done:false });
     input.value = "";
     save(name);
     renderList(name);
@@ -319,6 +254,143 @@ document.getElementById("budgetForm").addEventListener("submit", event => {
   renderBudget();
 });
 
+
+function renderPlaces(){
+  const container = document.getElementById("placeList");
+  container.innerHTML = "";
+
+  state.places
+    .slice()
+    .sort((a,b) => b.date.localeCompare(a.date))
+    .forEach((place) => {
+      const index = state.places.findIndex(x => x.id === place.id);
+
+      const card = document.createElement("div");
+      card.className = "place-card";
+
+      const head = document.createElement("div");
+      head.className = "place-head";
+
+      const titleWrap = document.createElement("div");
+      const name = document.createElement("div");
+      name.className = "place-name";
+      name.textContent = place.name;
+if (place.mapUrl) {
+  const pin = document.createElement("a");
+  pin.className = "map-pin";
+  pin.href = place.mapUrl;
+  pin.target = "_blank";
+  pin.rel = "noopener noreferrer";
+  pin.textContent = "📍";
+  name.appendChild(pin);
+}
+      const meta = document.createElement("div");
+      meta.className = "place-meta";
+      meta.textContent = `${formatShortDate(place.date)}・${place.type}・${place.area}`;
+
+      titleWrap.appendChild(name);
+      titleWrap.appendChild(meta);
+
+      const actions = document.createElement("div");
+      actions.className = "place-actions";
+
+      const edit = document.createElement("button");
+      edit.className = "edit-btn";
+      edit.type = "button";
+      edit.textContent = "修改";
+      edit.addEventListener("click", () => {
+        const newDate = prompt("修改日期（YYYY-MM-DD）", place.date);
+        if(!newDate) return;
+        const newName = prompt("修改店名 / 地點名稱", place.name);
+        if(!newName) return;
+        const newArea = prompt("修改地區", place.area);
+        if(newArea === null) return;
+        const newType = prompt("修改類型", place.type);
+        if(newType === null) return;
+        const newNote = prompt("修改心得", place.note);
+        if(newNote === null) return;
+
+        state.places[index] = {
+          ...place,
+          date: newDate,
+          name: newName.trim(),
+          area: newArea.trim(),
+          type: newType.trim(),
+          note: newNote.trim()
+        };
+        save("places");
+        renderPlaces();
+      });
+
+      const del = document.createElement("button");
+      del.className = "delete-btn";
+      del.type = "button";
+      del.textContent = "×";
+      del.addEventListener("click", () => {
+        state.places.splice(index, 1);
+        save("places");
+        renderPlaces();
+      });
+
+      actions.appendChild(edit);
+      actions.appendChild(del);
+      head.appendChild(titleWrap);
+      head.appendChild(actions);
+
+      const note = document.createElement("div");
+      note.className = "place-note";
+      note.textContent = place.note;
+
+      card.appendChild(head);
+
+      if(place.image){
+        const img = document.createElement("img");
+        img.className = "place-image";
+        img.src = place.image;
+        card.appendChild(img);
+      }
+
+      card.appendChild(note);
+      container.appendChild(card);
+    });
+}
+
+document.getElementById("placeForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const date = document.getElementById("placeDate").value;
+  const name = document.getElementById("placeName").value.trim();
+  const area = document.getElementById("placeArea").value.trim();
+  const type = document.getElementById("placeType").value;
+  const note = document.getElementById("placeNote").value.trim();
+  const imageFile = document.getElementById("placeImage").files[0];
+
+  if(!date || !name) return;
+
+  const savePlace = (image = "") => {
+    state.places.push({
+      id: Date.now().toString(),
+      date,
+      name,
+      area,
+      type,
+      note,
+      image
+    });
+
+    save("places");
+    renderPlaces();
+    document.getElementById("placeForm").reset();
+  };
+
+  if(imageFile){
+    const reader = new FileReader();
+    reader.onload = () => savePlace(reader.result);
+    reader.readAsDataURL(imageFile);
+  }else{
+    savePlace("");
+  }
+});
+
 function formatShortDate(value){
   const date = new Date(value + "T00:00:00");
   return `${date.getMonth()+1}/${date.getDate()}`;
@@ -368,6 +440,16 @@ function updateJapaneseDate(){
 }
 
 document.getElementById("diaryDate").addEventListener("change", updateJapaneseDate);
+
+["diaryDate","diaryMood","diaryText"].forEach(id => {
+  const el = document.getElementById(id);
+  const saved = localStorage.getItem(`hoshiken-v11-${id}`);
+  if(saved) el.value = saved;
+  el.addEventListener("input", () => {
+    localStorage.setItem(`hoshiken-v11-${id}`, el.value);
+    if(id === "diaryDate") updateJapaneseDate();
+  });
+});
 
 // photo upload
 const photoInput = document.getElementById("photoInput");
@@ -470,5 +552,6 @@ renderList("shoppingBefore");
 renderList("shoppingAfter");
 renderTimeline();
 renderBudget();
+renderPlaces();
 updateJapaneseDate();
 setupCanvas();
