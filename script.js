@@ -111,6 +111,22 @@ edit.addEventListener("click", () => {
   save(name);
   renderList(name);
 });
+const edit = document.createElement("button");
+edit.className = "edit-btn";
+edit.type = "button";
+edit.textContent = "修改";
+
+edit.addEventListener("click", () => {
+  const newText = prompt("修改項目", item.text);
+
+  if (!newText) return;
+
+  state[name][index].text = newText.trim();
+  state[name][index].date = extractDate(newText.trim());
+
+  save(name);
+  renderList(name);
+});
     const del = document.createElement("button");
     del.className = "delete-btn";
     del.type = "button";
@@ -126,6 +142,7 @@ edit.addEventListener("click", () => {
     row.appendChild(text);
     row.appendChild(edit);
     row.appendChild(del);
+    row.appendChild(edit);
     container.appendChild(row);
   });
 
