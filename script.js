@@ -106,9 +106,9 @@ function renderList(name){
 
 
     const edit = document.createElement("button");
-edit.className = "edit-btn";
-edit.type = "button";
-edit.textContent = "修改";
+    edit.className = "edit-btn";
+    edit.type = "button";
+    edit.textContent = "修改";
 
 edit.addEventListener("click", () => {
   const newText = prompt("修改項目內容", item.text);
@@ -136,6 +136,11 @@ edit.addEventListener("click", () => {
       renderList(name);
       updateProgress(name);
     });
+
+    const actions = document.createElement("div");
+    actions.className = "list-actions";
+    actions.appendChild(edit);
+    actions.appendChild(del);
 
     row.appendChild(checkbox);
     row.appendChild(text);
