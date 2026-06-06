@@ -296,3 +296,6 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
 .import-backup input{
   display:none;
 }
+#importBackup{
+  display:none;
+}
