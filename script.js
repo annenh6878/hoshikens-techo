@@ -284,15 +284,7 @@ function renderPlaces(){
   pin.textContent = "📍";
   name.appendChild(pin);
 }
-if (place.mapUrl) {
-  const pin = document.createElement("a");
-  pin.className = "map-pin";
-  pin.href = place.mapUrl;
-  pin.target = "_blank";
-  pin.rel = "noopener noreferrer";
-  pin.textContent = "📍";
-  name.appendChild(pin);
-}
+
       const meta = document.createElement("div");
       meta.className = "place-meta";
       meta.textContent = `${formatShortDate(place.date)}・${place.type}・${place.area}`;
