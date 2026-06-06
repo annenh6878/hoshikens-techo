@@ -694,12 +694,25 @@ function restoreBackup(file){
 
 document.getElementById("exportBackup").addEventListener("click", downloadBackup);
 
-document.getElementById("importBackup").addEventListener("change", event => {
+const importBackupBtn = document.getElementById("importBackupBtn");
+const importBackupInput = document.getElementById("importBackup");
+
+importBackupBtn.addEventListener("click", () => {
+  importBackupInput.click();
+});
+
+importBackupInput.addEventListener("change", event => {
+  alert("有選到備份檔，準備匯入");
+
   const file = event.target.files[0];
   if (!file) return;
 
   const ok = confirm("匯入備份會覆蓋目前星建資料，確定要繼續嗎？");
-  if (!ok) return;
+  if (!ok) {
+    event.target.value = "";
+    return;
+  }
 
   restoreBackup(file);
+  event.target.value = "";
 });

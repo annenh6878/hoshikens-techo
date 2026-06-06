@@ -383,3 +383,7 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   color:#9a7c89;
   font-size:1rem;
 }
+
+#importBackup{
+  display:none;
+}
