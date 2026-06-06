@@ -387,3 +387,14 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
 #importBackup{
   display:none;
 }
+
+#importBackup{
+  display:block !important;
+  position:static !important;
+  opacity:1 !important;
+  width:auto !important;
+  height:auto !important;
+  overflow:visible !important;
+  pointer-events:auto !important;
+  margin-top:8px;
+}
