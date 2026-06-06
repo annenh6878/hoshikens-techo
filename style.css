@@ -349,3 +349,37 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   color:#7b6fa6;
   white-space:nowrap;
 }
+.list-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+}
+
+.list-actions{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.edit-btn{
+  border:0;
+  min-width:42px;
+  height:30px;
+  border-radius:999px;
+  background:rgba(185,223,232,.45);
+  color:#617680;
+  font-size:.82rem;
+  font-weight:700;
+}
+
+.delete-btn{
+  border:0;
+  min-width:30px;
+  height:30px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  color:#9a7c89;
+  font-size:1rem;
+}

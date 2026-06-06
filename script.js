@@ -139,10 +139,10 @@ edit.addEventListener("click", () => {
 
     row.appendChild(checkbox);
     row.appendChild(text);
-    row.appendChild(edit);
-    row.appendChild(del);
+    row.appendChild(actions);
     container.appendChild(row);
-  });
+   });
+
 
   updateProgress(name);
 }
