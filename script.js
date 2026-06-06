@@ -24,9 +24,10 @@ const defaultLists = {
 };
 
 const defaultTimeline = [
-  { date: "2026-06-29", text: "飛日本・宿舍入住" },
-  { date: "2026-06-30", text: "日用品採買日" },
-  { date: "2026-07-01", text: "新生說明會" }
+  { date: "2026-06-29", text: "✈️ 飛往日本｜機票已確定" },
+  { date: "2026-06-29", text: "🏠 ドーミー西長堀入住" },
+  { date: "2026-06-30", text: "🧺 日用品採買日" },
+  { date: "2026-07-01", text: "🏫 新生說明會" }
 ];
 
 const defaultBudget = [
