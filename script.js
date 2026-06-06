@@ -104,6 +104,27 @@ function renderList(name){
     text.className = "item-text";
     text.textContent = item.text;
 
+
+    const edit = document.createElement("button");
+edit.className = "edit-btn";
+edit.type = "button";
+edit.textContent = "修改";
+
+edit.addEventListener("click", () => {
+  const newText = prompt("修改項目內容", item.text);
+  if (newText === null) return;
+
+  const trimmed = newText.trim();
+  if (!trimmed) return;
+
+  state[name][index].text = trimmed;
+  state[name][index].date = extractDate(trimmed);
+
+  save(name);
+  renderList(name);
+  updateProgress(name);
+});
+
     const del = document.createElement("button");
     del.className = "delete-btn";
     del.type = "button";
@@ -118,6 +139,7 @@ function renderList(name){
 
     row.appendChild(checkbox);
     row.appendChild(text);
+    row.appendChild(edit);
     row.appendChild(del);
     container.appendChild(row);
   });

@@ -299,3 +299,14 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
 #importBackup{
   display:none;
 }
+
+.edit-btn{
+  border:0;
+  min-width:44px;
+  height:30px;
+  border-radius:999px;
+  background:rgba(185,223,232,.45);
+  color:#617680;
+  font-size:.85rem;
+  font-weight:700;
+}
