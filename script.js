@@ -275,6 +275,15 @@ function renderPlaces(){
       const name = document.createElement("div");
       name.className = "place-name";
       name.textContent = place.name;
+      if (place.mapUrl) {
+  const pin = document.createElement("a");
+  pin.className = "map-pin";
+  pin.href = place.mapUrl;
+  pin.target = "_blank";
+  pin.rel = "noopener noreferrer";
+  pin.textContent = "📍";
+  name.appendChild(pin);
+}
 if (place.mapUrl) {
   const pin = document.createElement("a");
   pin.className = "map-pin";
@@ -361,6 +370,7 @@ document.getElementById("placeForm").addEventListener("submit", event => {
   const name = document.getElementById("placeName").value.trim();
   const area = document.getElementById("placeArea").value.trim();
   const type = document.getElementById("placeType").value;
+  const mapUrl = document.getElementById("placeMapUrl").value.trim();
   const note = document.getElementById("placeNote").value.trim();
   const imageFile = document.getElementById("placeImage").files[0];
 
@@ -368,14 +378,15 @@ document.getElementById("placeForm").addEventListener("submit", event => {
 
   const savePlace = (image = "") => {
     state.places.push({
-      id: Date.now().toString(),
-      date,
-      name,
-      area,
-      type,
-      note,
-      image
-    });
+  id: Date.now().toString(),
+  date,
+  name,
+  area,
+  type,
+  mapUrl,
+  note,
+  image
+});
 
     save("places");
     renderPlaces();
