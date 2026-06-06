@@ -558,3 +558,85 @@ renderBudget();
 renderPlaces();
 updateJapaneseDate();
 setupCanvas();
+
+function getAllHoshikenData(){
+  return {
+    version: "v11",
+    exportedAt: new Date().toISOString(),
+    state,
+    diary: {
+      diaryDate: localStorage.getItem("hoshiken-v9-diaryDate") || "",
+      diaryMood: localStorage.getItem("hoshiken-v9-diaryMood") || "",
+      diaryText: localStorage.getItem("hoshiken-v9-diaryText") || "",
+      photo: localStorage.getItem("hoshiken-v9-photo") || "",
+      drawing: localStorage.getItem("hoshiken-v9-drawing") || ""
+    }
+  };
+}
+
+function downloadBackup(){
+  const data = getAllHoshikenData();
+  const today = new Date().toISOString().slice(0, 10);
+  const fileName = `hoshiken-backup-${today}.json`;
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function restoreBackup(file){
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+
+      if (!data.state) {
+        alert("這個檔案不像星建備份檔喔。");
+        return;
+      }
+
+      Object.keys(data.state).forEach(key => {
+        state[key] = data.state[key];
+        save(key);
+      });
+
+      if (data.diary) {
+        Object.keys(data.diary).forEach(key => {
+          if (data.diary[key]) {
+            localStorage.setItem(`hoshiken-v9-${key}`, data.diary[key]);
+          }
+        });
+      }
+
+      alert("備份匯入完成！星建資料回來了 🩵");
+      location.reload();
+
+    } catch (error) {
+      alert("備份讀取失敗，檔案可能壞掉或格式不對。");
+      console.error(error);
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+document.getElementById("exportBackup").addEventListener("click", downloadBackup);
+
+document.getElementById("importBackup").addEventListener("change", event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const ok = confirm("匯入備份會覆蓋目前星建資料，確定要繼續嗎？");
+  if (!ok) return;
+
+  restoreBackup(file);
+});

@@ -271,3 +271,28 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   font-size:.95rem;
   vertical-align:middle;
 }
+.backup-bar{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+  margin:12px 0 10px;
+  position:relative;
+  z-index:30;
+}
+
+.backup-bar button,
+.import-backup{
+  border:1px solid rgba(222,216,205,.9);
+  background:rgba(255,255,255,.78);
+  color:#6c6177;
+  border-radius:18px;
+  padding:10px 14px;
+  font-weight:700;
+  font-size:.9rem;
+  box-shadow:0 6px 15px rgba(94,78,60,.08);
+}
+
+.import-backup input{
+  display:none;
+}
