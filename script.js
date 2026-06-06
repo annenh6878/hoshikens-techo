@@ -658,16 +658,25 @@ function restoreBackup(file){
         return;
       }
 
-      Object.keys(data.state).forEach(key => {
-        state[key] = data.state[key];
-        save(key);
+      const keys = [
+        "departure",
+        "shoppingBefore",
+        "shoppingAfter",
+        "timeline",
+        "budget",
+        "places"
+      ];
+
+      keys.forEach(key => {
+        const value = Array.isArray(data.state[key]) ? data.state[key] : [];
+
+        state[key] = value;
+        localStorage.setItem(`hoshiken-v9-${key}`, JSON.stringify(value));
       });
 
       if (data.diary) {
         Object.keys(data.diary).forEach(key => {
-          if (data.diary[key]) {
-            localStorage.setItem(`hoshiken-v9-${key}`, data.diary[key]);
-          }
+          localStorage.setItem(`hoshiken-v9-${key}`, data.diary[key] || "");
         });
       }
 
