@@ -56,20 +56,47 @@ function save(key){
   localStorage.setItem(`hoshiken-v9-${key}`, JSON.stringify(state[key]));
 }
 
+function extractDate(text) {
+  const match = text.match(/(\d{1,2})\/(\d{1,2})/);
+  if (!match) return "9999-12-31";
+
+  const month = match[1].padStart(2, "0");
+  const day = match[2].padStart(2, "0");
+
+  return `2026-${month}-${day}`;
+}
+
 function renderList(name){
   const container = document.getElementById(`${name}List`);
   container.innerHTML = "";
 
-  state[name].forEach((item, index) => {
+  const sortedItems = state[name]
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => {
+      // 1. 完成的項目排最上面
+      if (a.item.done !== b.item.done) {
+        return a.item.done ? -1 : 1;
+      }
+
+      // 2. 同樣完成 / 未完成時，照日期排序
+      const dateA = a.item.date || extractDate(a.item.text) || "9999-12-31";
+      const dateB = b.item.date || extractDate(b.item.text) || "9999-12-31";
+
+      return dateA.localeCompare(dateB);
+    });
+
+  sortedItems.forEach(({ item, index }) => {
     const row = document.createElement("div");
     row.className = "list-row";
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = item.done;
+
     checkbox.addEventListener("change", () => {
       state[name][index].done = checkbox.checked;
       save(name);
+      renderList(name);
       updateProgress(name);
     });
 
@@ -81,6 +108,7 @@ function renderList(name){
     del.className = "delete-btn";
     del.type = "button";
     del.textContent = "×";
+
     del.addEventListener("click", () => {
       state[name].splice(index, 1);
       save(name);
@@ -96,7 +124,6 @@ function renderList(name){
 
   updateProgress(name);
 }
-
 function updateProgress(name){
   const list = state[name];
   const total = list.length;
@@ -117,7 +144,11 @@ document.querySelectorAll(".add-form").forEach(form => {
     const text = input.value.trim();
     if(!text) return;
 
-    state[name].push({ text, done:false });
+    state[name].push({
+  date: extractDate(text),
+  text,
+  done:false
+});
     input.value = "";
     save(name);
     renderList(name);
