@@ -950,6 +950,8 @@ if (clearCanvas) {
   const ctx = clearCanvas.getContext("2d");
   ctx.clearRect(0, 0, clearCanvas.width, clearCanvas.height);
 }
+    document.getElementById("diaryMood").value = "";
+    document.getElementById("diaryText").value = "";
     
     alert("今天的日記已經歸檔好了 🩵");
   });
