@@ -796,7 +796,7 @@ function renderDiaryEntries(){
 
       if (entry.photo) {
        const img = document.createElement("img");
-       img.className = "diary-entry-image";
+       img.className = "diary-entry-thumb";
        img.src = entry.photo;
        img.alt = "日記照片";
 
@@ -809,7 +809,7 @@ function renderDiaryEntries(){
 
       if (entry.drawing) {
        const drawingImg = document.createElement("img");
-       drawingImg.className = "diary-entry-image";
+       drawingImg.className = "diary-entry-thumb";
        drawingImg.src = entry.drawing;
        drawingImg.alt = "日記塗鴉";
        drawingImg.addEventListener("click", () => {
@@ -918,6 +918,38 @@ if (saveDiaryBtn) {
     alert("今天的日記已經歸檔好了 🩵");
   });
 }
+function openImageViewer(src) {
+  const viewer = document.getElementById("imageViewer");
+  const viewerImg = document.getElementById("imageViewerImg");
 
+  if (!viewer || !viewerImg) return;
+  viewerImg.src = src;
+  viewer.hidden = false;
+}
+
+function setupImageViewer() {
+  const viewer = document.getElementById("imageViewer");
+  const viewerImg = document.getElementById("imageViewerImg");
+  const closeBtn = document.getElementById("closeImageViewer");
+
+  if (!viewer || !viewerImg) return;
+  viewer.addEventListener("click", () => {
+    viewer.hidden = true;
+    viewerImg.src = "";
+  });
+
+  viewerImg.addEventListener("click", (event) => {
+    event.stopPropagation();
+});
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    viewer.hidden = true;
+    viewerImg.src = "";
+  });
+}
+}
+
+setupImageViewer();
 renderDiaryEntries();
-
