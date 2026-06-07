@@ -775,6 +775,28 @@ function renderDiaryEntries(){
       card.appendChild(date);
       card.appendChild(mood);
       card.appendChild(text);
+      if (entry.photo || entry.drawing) {
+       const media = document.createElement("div");
+       media.className = "diary-entry-media";
+
+      if (entry.photo) {
+       const img = document.createElement("img");
+       img.className = "diary-entry-image";
+       img.src = entry.photo;
+       img.alt = "日記照片";
+       media.appendChild(img);
+     }
+
+      if (entry.drawing) {
+       const drawingImg = document.createElement("img");
+       drawingImg.className = "diary-entry-image";
+       drawingImg.src = entry.drawing;
+       drawingImg.alt = "日記塗鴉";
+       media.appendChild(drawingImg);
+     }
+
+      card.appendChild(media);
+}
       card.appendChild(del);
       container.appendChild(card);
     });
@@ -790,22 +812,29 @@ if (saveDiaryBtn) {
     const diaryMood = diaryMoodEl?.value.trim() || "";
     const diaryText = diaryTextEl?.value.trim() || "";
 
-    if (!diaryMood && !diaryText) {
-      alert("先寫一點日記再保存喔 🩵");
-      return;
-    }
+    const photo = localStorage.getItem("hoshiken-v9-photo") || "";
+    const drawing = localStorage.getItem("hoshiken-v9-drawing") || "";
 
+    if (!diaryMood && !diaryText && !photo && !drawing) {
+  alert("先寫一點日記、放照片或畫塗鴉再保存喔 🩵");
+  return;
+}
+
+    
     const now = new Date();
     const date = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}.${String(now.getDate()).padStart(2, "0")}`;
 
     const entries = loadDiaryEntries();
 
+
     entries.push({
-      date,
-      mood: diaryMood,
-      text: diaryText,
-      createdAt: now.toISOString()
-    });
+     date,
+     mood: diaryMood,
+     text: diaryText,
+     photo,
+     drawing,
+     createdAt: now.toISOString()
+});
 
     saveDiaryEntries(entries);
 
@@ -815,6 +844,18 @@ if (saveDiaryBtn) {
     if (diaryMoodEl) diaryMoodEl.value = "";
     if (diaryTextEl) diaryTextEl.value = "";
 
+    localStorage.setItem("hoshiken-v9-photo", "");
+    localStorage.setItem("hoshiken-v9-drawing", "");
+
+    const photoPreview = document.getElementById("photoPreview");
+    if (photoPreview) photoPreview.src = "";
+
+    const canvas = document.getElementById("drawCanvas");
+    if (canvas) {
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
     renderDiaryEntries();
 
     alert("今天的日記已經歸檔好了 🩵");
@@ -823,14 +864,3 @@ if (saveDiaryBtn) {
 
 renderDiaryEntries();
 
-if (saveDiaryBtn) {
-  saveDiaryBtn.addEventListener("click", () => {
-    const diaryMood = document.getElementById("diaryMood")?.value || "";
-    const diaryText = document.getElementById("diaryText")?.value || "";
-
-    localStorage.setItem("hoshiken-v9-diaryMood", diaryMood);
-    localStorage.setItem("hoshiken-v9-diaryText", diaryText);
-
-    alert("日記保存好了 🩵");
-  });
-}
