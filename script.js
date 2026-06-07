@@ -926,29 +926,29 @@ if (saveDiaryBtn) {
 const diaryMoodEl = document.getElementById("diaryMood");
 const diaryTextEl = document.getElementById("diaryText");
 
-if (diaryMoodEl) diaryMoodEl.value = "";
-if (diaryTextEl) diaryTextEl.value = "";
+if (clearDiaryMoodEl) clearDiaryMoodEl.value = "";
+if (clearDiaryTextEl) clearDiaryTextEl.value = "";
 
 localStorage.setItem("hoshiken-v9-diaryMood", "");
 localStorage.setItem("hoshiken-v9-diaryText", "");
 localStorage.setItem("hoshiken-v9-photo", "");
 localStorage.setItem("hoshiken-v9-drawing", "");
 
-const photoPreview = document.getElementById("photoPreview");
-if (photoPreview) {
-  photoPreview.src = "";
-  photoPreview.hidden = true;
+const clearPhotoPreview = document.getElementById("photoPreview");
+if (clearPhotoPreview) {
+  clearPhotoPreview.src = "";
+  clearPhotoPreview.hidden = true;
 }
 
-const photoInput = document.getElementById("photoInput");
-if (photoInput) {
-  photoInput.value = "";
+const clearPhotoInput = document.getElementById("photoInput");
+if (clearPhotoInput) {
+  clearPhotoInput.value = "";
 }
 
-const canvas = document.getElementById("drawCanvas");
-if (canvas) {
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+const clearCanvas = document.getElementById("drawCanvas");
+if (clearCanvas) {
+  const ctx = clearCanvas.getContext("2d");
+  ctx.clearRect(0, 0, clearCanvas.width, clearCanvas.height);
 }
     
     alert("今天的日記已經歸檔好了 🩵");
@@ -957,7 +957,7 @@ if (canvas) {
 function openImageViewer(src) {
   const viewer = document.getElementById("imageViewer");
   const viewerImg = document.getElementById("imageViewerImg");
-  
+
   if (!viewer || !viewerImg) return;
 
   viewerImg.src = src;
