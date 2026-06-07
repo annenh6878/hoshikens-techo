@@ -921,29 +921,45 @@ if (saveDiaryBtn) {
 
     renderDiaryEntries();
 
-    function openImageViewer(src){
-       const overlay = document.createElement("div");
-       overlay.className = "image-viewer";
 
-       const img = document.createElement("img");
-       img.src = src;
-        img.alt = "放大圖片";
+// 保存後清空日記輸入區
+const diaryMoodEl = document.getElementById("diaryMood");
+const diaryTextEl = document.getElementById("diaryText");
 
-        overlay.appendChild(img);
-        
-        overlay.addEventListener("click", () => {  
-           overlay.remove();
-        });
-        document.body.appendChild(overlay);
-    }
+if (diaryMoodEl) diaryMoodEl.value = "";
+if (diaryTextEl) diaryTextEl.value = "";
+
+localStorage.setItem("hoshiken-v9-diaryMood", "");
+localStorage.setItem("hoshiken-v9-diaryText", "");
+localStorage.setItem("hoshiken-v9-photo", "");
+localStorage.setItem("hoshiken-v9-drawing", "");
+
+const photoPreview = document.getElementById("photoPreview");
+if (photoPreview) {
+  photoPreview.src = "";
+  photoPreview.hidden = true;
+}
+
+const photoInput = document.getElementById("photoInput");
+if (photoInput) {
+  photoInput.value = "";
+}
+
+const canvas = document.getElementById("drawCanvas");
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+    
     alert("今天的日記已經歸檔好了 🩵");
   });
 }
 function openImageViewer(src) {
   const viewer = document.getElementById("imageViewer");
   const viewerImg = document.getElementById("imageViewerImg");
-
+  
   if (!viewer || !viewerImg) return;
+
   viewerImg.src = src;
   viewer.hidden = false;
 }
