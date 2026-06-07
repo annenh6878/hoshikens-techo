@@ -921,38 +921,8 @@ if (saveDiaryBtn) {
 
     renderDiaryEntries();
 
+    clearDiaryForm();
 
-// 保存後清空日記輸入區
-const clearDiaryMoodEl = document.getElementById("diaryMood");
-const clearDiaryTextEl = document.getElementById("diaryText");
-
-if (clearDiaryMoodEl) clearDiaryMoodEl.value = "";
-if (clearDiaryTextEl) clearDiaryTextEl.value = "";
-
-localStorage.setItem("hoshiken-v9-diaryMood", "");
-localStorage.setItem("hoshiken-v9-diaryText", "");
-localStorage.setItem("hoshiken-v9-photo", "");
-localStorage.setItem("hoshiken-v9-drawing", "");
-
-const clearPhotoPreview = document.getElementById("photoPreview");
-if (clearPhotoPreview) {
-  clearPhotoPreview.src = "";
-  clearPhotoPreview.hidden = true;
-}
-
-const clearPhotoInput = document.getElementById("photoInput");
-if (clearPhotoInput) {
-  clearPhotoInput.value = "";
-}
-
-const clearCanvas = document.getElementById("drawCanvas");
-if (clearCanvas) {
-  const ctx = clearCanvas.getContext("2d");
-  ctx.clearRect(0, 0, clearCanvas.width, clearCanvas.height);
-}
-    document.getElementById("diaryMood").value = "";
-    document.getElementById("diaryText").value = "";
-    
     alert("今天的日記已經歸檔好了 🩵");
   });
 }
@@ -992,3 +962,37 @@ if (closeBtn) {
 
 setupImageViewer();
 renderDiaryEntries();
+
+function clearDiaryForm() {
+  const mood = document.getElementById("diaryMood");
+  const text = document.getElementById("diaryText");
+  const photoPreview = document.getElementById("photoPreview");
+  const photoInput = document.getElementById("photoInput");
+  const canvas = document.getElementById("drawCanvas");
+
+  if (mood) mood.value = "";
+  if (text) text.value = "";
+
+  localStorage.setItem("hoshiken-v9-diaryMood", "");
+  localStorage.setItem("hoshiken-v9-diaryText", "");
+  localStorage.setItem("hoshiken-v9-photo", "");
+  localStorage.setItem("hoshiken-v9-drawing", "");
+
+  if (photoPreview) {
+    photoPreview.src = "";
+    photoPreview.removeAttribute("src");
+    photoPreview.hidden = true;
+  }
+
+  if (photoInput) {
+    photoInput.value = "";
+  }
+
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  if (mood) mood.dispatchEvent(new Event("input", { bubbles: true }));
+  if (text) text.dispatchEvent(new Event("input", { bubbles: true }));
+}
