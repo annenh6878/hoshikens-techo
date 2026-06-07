@@ -431,3 +431,48 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   font-size:.95rem;
   box-shadow:0 8px 18px rgba(94,78,60,.08);
 }
+.diary-archive{
+  margin-top:22px;
+  display:grid;
+  gap:12px;
+}
+
+.diary-archive h3{
+  margin:0;
+  color:#6c6177;
+  font-size:1.05rem;
+}
+
+#diaryList{
+  display:grid;
+  gap:12px;
+}
+
+.diary-entry-card{
+  position:relative;
+  padding:16px 18px;
+  border-radius:24px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(222,216,205,.85);
+  box-shadow:0 8px 18px rgba(94,78,60,.06);
+}
+
+.diary-entry-date{
+  color:#7b6fa6;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.diary-entry-mood,
+.diary-entry-text{
+  margin:6px 0;
+  color:#6b625f;
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+
+.diary-entry-card .delete-btn{
+  position:absolute;
+  right:12px;
+  top:12px;
+}
