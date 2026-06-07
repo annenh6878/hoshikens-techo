@@ -476,3 +476,23 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   right:12px;
   top:12px;
 }
+
+.diary-entry-image{
+  width:100%;
+  max-height:160px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid rgba(222,216,205,.8);
+  background:rgba(255,255,255,.6);
+}
+.diary-entry-card{
+  overflow:hidden;
+}
+
+.diary-entry-mood,
+.diary-entry-text{
+  font-size:1rem;
+  line-height:1.7;
+  word-break:break-word;
+  overflow-wrap:anywhere;
+}
