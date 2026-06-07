@@ -799,6 +799,11 @@ function renderDiaryEntries(){
        img.className = "diary-entry-image";
        img.src = entry.photo;
        img.alt = "日記照片";
+
+        img.addEventListener("click", () => {
+           openImageViewer(entry.photo);
+        });
+
        media.appendChild(img);
      }
 
@@ -807,6 +812,9 @@ function renderDiaryEntries(){
        drawingImg.className = "diary-entry-image";
        drawingImg.src = entry.drawing;
        drawingImg.alt = "日記塗鴉";
+       drawingImg.addEventListener("click", () => {
+         openImageViewer(entry.drawing);
+       });
        media.appendChild(drawingImg);
      }
 
@@ -892,6 +900,21 @@ if (saveDiaryBtn) {
 
     renderDiaryEntries();
 
+    function openImageViewer(src){
+       const overlay = document.createElement("div");
+       overlay.className = "image-viewer";
+
+       const img = document.createElement("img");
+       img.src = src;
+        img.alt = "放大圖片";
+
+        overlay.appendChild(img);
+        
+        overlay.addEventListener("click", () => {  
+           overlay.remove();
+        });
+        document.body.appendChild(overlay);
+    }
     alert("今天的日記已經歸檔好了 🩵");
   });
 }
