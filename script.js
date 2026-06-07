@@ -800,6 +800,16 @@ function renderDiaryEntries(){
        img.src = entry.photo;
        img.alt = "日記照片";
 
+       img.style.width = "76px";
+       img.style.height = "76px";
+       img.style.maxWidth = "76px";
+       img.style.maxHeight = "76px";
+       img.style.objectFit = "cover";
+       img.style.borderRadius = "18px";
+       img.style.cursor = "pointer";
+       img.style.display = "inline-block";
+       img.style.flex = "0 0 76px";
+
         img.addEventListener("click", () => {
            openImageViewer(entry.photo);
         });
@@ -812,6 +822,17 @@ function renderDiaryEntries(){
        drawingImg.className = "diary-entry-thumb";
        drawingImg.src = entry.drawing;
        drawingImg.alt = "日記塗鴉";
+
+        drawingImg.style.width = "76px";
+        drawingImg.style.height = "76px";
+        drawingImg.style.maxWidth = "76px";
+        drawingImg.style.maxHeight = "76px";
+        drawingImg.style.objectFit = "cover";
+        drawingImg.style.borderRadius = "18px";
+        drawingImg.style.cursor = "pointer";
+        drawingImg.style.display = "inline-block";
+        drawingImg.style.flex = "0 0 76px";
+        
        drawingImg.addEventListener("click", () => {
          openImageViewer(entry.drawing);
        });
