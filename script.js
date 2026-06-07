@@ -923,8 +923,8 @@ if (saveDiaryBtn) {
 
 
 // 保存後清空日記輸入區
-const diaryMoodEl = document.getElementById("diaryMood");
-const diaryTextEl = document.getElementById("diaryText");
+const clearDiaryMoodEl = document.getElementById("diaryMood");
+const clearDiaryTextEl = document.getElementById("diaryText");
 
 if (clearDiaryMoodEl) clearDiaryMoodEl.value = "";
 if (clearDiaryTextEl) clearDiaryTextEl.value = "";
