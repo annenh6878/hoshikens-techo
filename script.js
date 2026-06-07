@@ -812,8 +812,24 @@ if (saveDiaryBtn) {
     const diaryMood = diaryMoodEl?.value.trim() || "";
     const diaryText = diaryTextEl?.value.trim() || "";
 
-    const photo = localStorage.getItem("hoshiken-v9-photo") || "";
-    const drawing = localStorage.getItem("hoshiken-v9-drawing") || "";
+    const photoPreviewEl = document.getElementById("photoPreview");
+    const photo = photoPreviewEl?.getAttribute("src") || localStorage.getItem("hoshiken-v9-photo") || "";
+
+    const drawCanvasEl = document.getElementById("drawCanvas");
+    let drawing = localStorage.getItem("hoshiken-v9-drawing") || "";
+
+    if (drawCanvasEl) {
+     const blankCanvas = document.createElement("canvas");
+     blankCanvas.width = drawCanvasEl.width;
+     blankCanvas.height = drawCanvasEl.height;
+
+     const currentDrawing = drawCanvasEl.toDataURL("image/png");
+     const blankDrawing = blankCanvas.toDataURL("image/png");
+
+     if (currentDrawing !== blankDrawing) {
+       drawing = currentDrawing;
+    }
+}
 
     if (!diaryMood && !diaryText && !photo && !drawing) {
   alert("先寫一點日記、放照片或畫塗鴉再保存喔 🩵");
