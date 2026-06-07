@@ -418,3 +418,16 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   box-shadow:0 8px 18px rgba(94,78,60,.08);
   white-space:nowrap;
 }
+
+.diary-save-btn{
+  border:0;
+  border-radius:999px;
+  padding:12px 18px;
+  margin:12px 0 18px;
+  width:100%;
+  background:linear-gradient(90deg, #8fc1cf, #9b86d6);
+  color:white;
+  font-weight:800;
+  font-size:.95rem;
+  box-shadow:0 8px 18px rgba(94,78,60,.08);
+}

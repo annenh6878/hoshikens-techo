@@ -721,3 +721,17 @@ importBackupInput.addEventListener("change", event => {
   restoreBackup(file);
   event.target.value = "";
 });
+
+const saveDiaryBtn = document.getElementById("saveDiary");
+
+if (saveDiaryBtn) {
+  saveDiaryBtn.addEventListener("click", () => {
+    const diaryMood = document.getElementById("diaryMood")?.value || "";
+    const diaryText = document.getElementById("diaryText")?.value || "";
+
+    localStorage.setItem("hoshiken-v9-diaryMood", diaryMood);
+    localStorage.setItem("hoshiken-v9-diaryText", diaryText);
+
+    alert("日記保存好了 🩵");
+  });
+}
