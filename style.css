@@ -496,3 +496,35 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   word-break:break-word;
   overflow-wrap:anywhere;
 }
+
+.diary-entry-toggle{
+  width:100%;
+  border:0;
+  background:rgba(255,255,255,.56);
+  color:#7b6fa6;
+  border-radius:18px;
+  padding:12px 14px;
+  font-size:1.05rem;
+  font-weight:900;
+  text-align:left;
+}
+
+.diary-entry-body{
+  margin-top:12px;
+  animation: diaryOpen .18s ease-out;
+}
+
+.diary-entry-body[hidden]{
+  display:none;
+}
+
+@keyframes diaryOpen{
+  from{
+    opacity:0;
+    transform:translateY(-4px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}

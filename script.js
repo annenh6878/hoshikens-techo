@@ -772,9 +772,24 @@ function renderDiaryEntries(){
         renderDiaryEntries();
       });
 
-      card.appendChild(date);
-      card.appendChild(mood);
-      card.appendChild(text);
+      const toggle = document.createElement("button");
+      toggle.className = "diary-entry-toggle";
+      toggle.type = "button";
+      toggle.textContent = `▸ ${entry.date}`;
+
+      const body = document.createElement("div");
+      body.className = "diary-entry-body";
+      body.hidden = true;
+
+      toggle.addEventListener("click", () => {
+       body.hidden = !body.hidden;
+       toggle.textContent = body.hidden ? `▸ ${entry.date}` : `▾ ${entry.date}`;
+   });
+
+      body.appendChild(mood);
+      body.appendChild(text);
+
+      
       if (entry.photo || entry.drawing) {
        const media = document.createElement("div");
        media.className = "diary-entry-media";
@@ -795,9 +810,12 @@ function renderDiaryEntries(){
        media.appendChild(drawingImg);
      }
 
-      card.appendChild(media);
+      body.appendChild(media);
 }
-      card.appendChild(del);
+      body.appendChild(del);
+      
+      card.appendChild(toggle);
+      card.appendChild(body);
       container.appendChild(card);
     });
 }
