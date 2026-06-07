@@ -602,3 +602,30 @@ footer{text-align:center;color:#8a8177;padding-top:20px;font-size:.92rem}
   font-size: 28px;
   line-height: 1;
 }
+
+.diary-entry-thumbnail {
+  width: 76px !important;
+  height: 76px !important;
+  max-width: 76px !important;
+  max-height: 76px !important;
+  object-fit: cover;
+  border-radius: 18px;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid rgba(130, 110, 170, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 8px 18px rgba(80, 65, 120, 0.12);
+}
+
+.diary-entry-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.diary-entry-media img.diary-entry-thumbnail {
+  width: 76px !important;
+  height: 76px !important;
+  max-width: 76px !important;
+}
